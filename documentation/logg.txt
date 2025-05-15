@@ -1,0 +1,36 @@
+------------------------------------------------------------------------------------------------------------
+
+					headclicker logg
+
+------------------------------------------------------------------------------------------------------------
+
+Monday 12/5/25
+jobbet med spillet, lagde en area for spilleren, lagde kamera og bevegeslsesystem samt med at jeg jobber med random enemys.
+
+Tirsdag 13/5/25
+jobbet med header filer og la in våpen modellen og fikset at den følger kameraet imens man er i bevegelse https://search.brave.com/search?q=raylib+how+to+make+model+point+towards+camera+targer&source=desktop&summary=1&conversation=a09f2fdf96867fd349b80a
+ryddet ogsaa opp i main filen, jobbet med aa putte forsjellige deler i egene filer for ryddigere kode.
+
+Onsdag 14/5/25
+fixed shooting by adding a function that sends a bullet flying only on the x axis, leading to the player not being able to shoot up or down,
+bullet flies towards crosshair but the bullet takes too long to reach the crosshair.
+
+made reloading possible with a function that resets the bullet to the end of the guns barrel everytime mouse button 1 is released or the player presses R,
+added a enemy to the map, does nothing yet.
+
+Torsdag 15/5/25
+
+
+
+-----------------------------------------------------------------------------------------------------------
+						TODO:
+
+	fix shooting, be able to shoot up and down.
+	make the gun lose bullets everytime you shoot, need to reload at 0 bullets
+	collision mechanic between player and wall, enemy and wall and bullets and wall/enemy
+	a simple particle when the bullet hits something
+	Enemies randomly spawning and taking damage, falling when dead
+
+	Lighting on the map, shaders
+
+-----------------------------------------------------------------------------------------------------------

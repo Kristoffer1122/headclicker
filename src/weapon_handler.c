@@ -54,7 +54,7 @@ void draw_Weapon_Hitbox2(Camera3D *camera, Weapon weapon) {
 
   // ---- FIX: wrap yaw to [0, 2π) to prevent quadrant flipping
   if (yaw < 0.0f)
-    yaw += 2.0f * PI;
+    pitch = -pitch;
 
   // One-time mesh fix: if your model faces +X, rotate -90° so it faces +Z
   const Matrix meshFix = MatrixRotateY(PI / 2.0f); // flip direction
@@ -62,7 +62,7 @@ void draw_Weapon_Hitbox2(Camera3D *camera, Weapon weapon) {
   // Rotation matrices
   Matrix rotYaw = MatrixRotateY(yaw);
   Matrix rotPitch = MatrixRotateX(pitch);
-  Matrix rotView = MatrixMultiply(rotPitch, rotYaw); // <- new order
+  Matrix rotView = MatrixMultiply(rotYaw, rotPitch); // <- new order
   Matrix rotFinal = MatrixMultiply(rotView, meshFix);
 
   // 5. Combine final transform matrix

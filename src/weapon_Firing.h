@@ -7,12 +7,18 @@ struct Weapon_info {
 };
 
 struct Bullet {
+  Vector3 position;
+  Vector3 direction;
+  float speed;
+  bool active;
   float height;
   float width;
   float length;
   Vector3 offset;
 };
 
-void bullet_Fired(Camera3D camera);
+void shoot(Camera3D* camera);
 
-void reload(Camera3D camera);
+void bullet_Fired(Camera3D* camera);
+
+void reload(Camera3D* camera);

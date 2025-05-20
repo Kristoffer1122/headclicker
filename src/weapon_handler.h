@@ -19,4 +19,7 @@ Weapon load_weapon_Revolver();
 
 Weapon weapon_handling(Camera3D camera);
 
-void draw_Weapon(Camera3D camera, Weapon weapon_revolver);
+void draw_Weapon_Hitbox2(Camera3D* p_Camera, Weapon weapon);
+void draw_Weapon_Hitbox(Camera3D* camera, Weapon weapon);
+
+void draw_Weapon(Camera3D camera, Weapon weapon);

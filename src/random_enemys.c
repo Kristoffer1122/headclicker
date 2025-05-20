@@ -16,7 +16,7 @@ struct Enemy enemy = {
     true,
 };
 
-void spawn_Enemy(Camera3D camera) {
+void spawn_Enemy(Camera3D* camera) {
 
    enemy.model = LoadModel("../resources/enemy_models/greenman.glb");
 

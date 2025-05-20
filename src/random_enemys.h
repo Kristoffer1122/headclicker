@@ -9,4 +9,4 @@ struct Enemy {
 	Texture texture;
 };
 
-void spawn_Enemy(Camera3D camera);
+void spawn_Enemy(Camera3D* camera);

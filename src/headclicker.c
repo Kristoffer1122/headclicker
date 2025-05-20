@@ -9,6 +9,7 @@
 
 #include "camera.h"
 #include "collision_handler.h"
+#include "physics.h"
 #include "player_movement.h"
 #include "random_enemys.h"
 #include "weapon_Firing.h"
@@ -30,8 +31,11 @@ int main(void) {
   camera.fovy = 60.0f;             // Camera field-of-view Y
   camera.projection = CAMERA_PERSPECTIVE; // Camera projection type
   int cameraMode = CAMERA_FIRST_PERSON;
+  Camera3D *p_Camera = &camera;
 
   struct World world_Map;
+  struct Bullet bullet;
+  struct Game game;
 
   // load weapon and add texture
   Weapon weapon_Revolver = load_weapon_Revolver();
@@ -42,6 +46,13 @@ int main(void) {
   // game loop
   while (!WindowShouldClose()) {
     UpdateCamera(&camera, cameraMode);
+    // time since last frame
+    float delta_Time = GetFrameTime();
+    game.delta_Time = &delta_Time;
+
+    if (delta_Time > 20) {
+      CloseWindow();
+    }
 
     BeginDrawing();
     ClearBackground(WHITE);
@@ -50,19 +61,18 @@ int main(void) {
     loadmap();
     // raymap();
 
-    draw_Weapon(camera, weapon_Revolver);
+    // draw_Weapon(camera, weapon_Revolver);
+    // draw_Weapon_Hitbox(p_Camera, weapon_Revolver);
+    draw_Weapon_Hitbox2(p_Camera, weapon_Revolver);
+
     // shooting mechanic
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-      bullet_Fired(camera);
-    } else
-      reload(camera);
-
-    // reload mechanic
-    if (IsKeyDown(KEY_R)) {
-      reload(camera);
+      shoot(p_Camera);
     }
 
-    spawn_Enemy(camera);
+    spawn_Enemy(p_Camera);
+    DrawCube((Vector3){0, 0.5f, 0}, 1, 1, 1, DARKGRAY); // Ground cube
+    DrawGrid(10, 1); // Grid helps with orientation
 
     EndMode3D();
 
@@ -72,8 +82,9 @@ int main(void) {
   }
 
   UnloadTexture(world_Map.texture); // Unload cubicmap texture
-  UnloadTexture(world_Map.texture);  // Unload map texture
   UnloadModel(world_Map.model);
+    UnloadMesh(world_Map.mesh);
+    UnloadImage(world_Map.image);
 
   UnloadModel(weapon_Revolver.model);
   UnloadModel(enemy_Test.model);

@@ -39,6 +39,7 @@ int main(void) {
 
   // load weapon and add texture
   Weapon weapon = load_Weapon();
+  weapon.texture = LoadTexture("../resources/weapons/Gun _obj/Gun.png");
   Weapon *p_Weapon = &weapon;
   struct Enemy enemy_Test;
 
@@ -65,6 +66,7 @@ int main(void) {
     // shooting mechanic
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
       shoot(p_Camera);
+      bullet_Update(p_Camera);
     }
 
     spawn_Enemy(p_Camera);
@@ -82,6 +84,7 @@ int main(void) {
   UnloadMesh(world_Map.mesh);
   UnloadImage(world_Map.image);
 
+  UnloadTexture(weapon.texture);
   UnloadModel(weapon.model);
   UnloadModel(enemy_Test.model);
 

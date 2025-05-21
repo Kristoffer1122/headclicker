@@ -4,7 +4,7 @@
 
 ------------------------------------------------------------------------------------------------------------
 
-Monday 12/5/25
+Mandag 12/5/25
 jobbet med spillet, lagde en area for spilleren, lagde kamera og bevegeslsesystem samt med at jeg jobber med random enemys.
 
 Tirsdag 13/5/25
@@ -19,7 +19,19 @@ made reloading possible with a function that resets the bullet to the end of the
 added a enemy to the map, does nothing yet.
 
 Torsdag 15/5/25
+Worked on making the gun face towards the camera target, couldnt make it work but learned alot about vectors and how they behave, changed the bullet so it moves towards the camera target, also didnt work but got the bullet to start at the camera target.
 
+
+Fredag 16/5/25
+fixed the gun not changing pitch, but now it doesnt change its yaw, need to use trigonometry to figure out the angle.
+
+Tirsdag 20/5/25
+Finally fixed the gun, its kinda wonkey but works.
+had to add theta to the mix and calculate the angle we were away from the x, y, z, vectors
+// fixed it with reversing the pitch when yaw < 0
+
+Onsdag 21/5/25
+Actually fixed the gun this time, had to include a header file that helps with matrix work,
 
 
 -----------------------------------------------------------------------------------------------------------
@@ -27,6 +39,7 @@ Torsdag 15/5/25
 
 	fix shooting, be able to shoot up and down.
 	make the gun lose bullets everytime you shoot, need to reload at 0 bullets
+	big on the collision mechanic
 	collision mechanic between player and wall, enemy and wall and bullets and wall/enemy
 	a simple particle when the bullet hits something
 	Enemies randomly spawning and taking damage, falling when dead

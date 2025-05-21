@@ -24,4 +24,6 @@ void shoot(Camera3D* camera);
 
 void bullet_Fired(Camera3D* camera);
 
+void bullet_Update(Camera3D* camera);
+
 void reload(Camera3D* camera);

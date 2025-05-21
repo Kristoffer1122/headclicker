@@ -11,6 +11,8 @@
 #include "physics.h"
 #include <raylib.h>
 #include <raymath.h>
+#include <rlgl.h> 
+
 
 struct Bullet bullet;
 struct BulletPool bullet_Pool;
@@ -54,4 +56,20 @@ void bullet_Fired(Camera3D *camera) {
   }
 };
 
-void reload(Camera3D *camera) {}
+void reload(Camera3D *camera) {
+
+
+
+}
+
+
+void bullet_Update(Camera3D *camera) {
+
+  Vector3 forward =
+      Vector3Normalize(Vector3Subtract(camera->target, camera->position));
+
+    DrawSphereEx(forward, 1.0f, 1, 1, BLACK);
+
+}
+
+

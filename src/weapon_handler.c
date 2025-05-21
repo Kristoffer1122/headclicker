@@ -59,6 +59,7 @@ void draw_Weapon(Camera3D *camera, Weapon *weapon) {
   // move model position
     rlTranslatef(weaponPos.x, weaponPos.y, weaponPos.z);
     
+ // NOTE: This is where the magic happens
   // rotate model right pitch and yaw 
   // yaw
     rlRotatef(yaw * RAD2DEG, 0, 1, 0);

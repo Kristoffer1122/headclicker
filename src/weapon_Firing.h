@@ -1,21 +1,24 @@
 #include <raylib.h>
+#include <stdint.h>
 
-struct Weapon_info {
-  int ammo;
-  int damage;
-  float bullet_speed;
-};
+// max bullets
+#define MAX_BULLETS 100
 
-struct Bullet {
+typedef struct Bullet {
   Vector3 position;
   Vector3 direction;
   float speed;
+  float lifetime;
   bool active;
-  float height;
-  float width;
-  float length;
-  Vector3 offset;
-};
+  float radius;
+  Color color;
+} Bullet;
+
+typedef struct BulletPool {
+    Bullet bullets[MAX_BULLETS];
+    int count;
+} BulletPool;
+
 
 void shoot(Camera3D* camera);
 

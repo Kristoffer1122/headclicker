@@ -38,7 +38,8 @@ int main(void) {
   struct Game game;
 
   // load weapon and add texture
-  Weapon weapon_Revolver = load_weapon_Revolver();
+  Weapon weapon = load_Weapon();
+  Weapon *p_Weapon = &weapon;
   struct Enemy enemy_Test;
 
   DisableCursor();
@@ -50,10 +51,6 @@ int main(void) {
     float delta_Time = GetFrameTime();
     game.delta_Time = &delta_Time;
 
-    if (delta_Time > 20) {
-      CloseWindow();
-    }
-
     BeginDrawing();
     ClearBackground(WHITE);
     BeginMode3D(camera);
@@ -63,7 +60,7 @@ int main(void) {
 
     // draw_Weapon(camera, weapon_Revolver);
     // draw_Weapon_Hitbox(p_Camera, weapon_Revolver);
-    draw_Weapon_Hitbox2(p_Camera, weapon_Revolver);
+    draw_Weapon(p_Camera, p_Weapon);
 
     // shooting mechanic
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
@@ -71,7 +68,6 @@ int main(void) {
     }
 
     spawn_Enemy(p_Camera);
-    DrawCube((Vector3){0, 0.5f, 0}, 1, 1, 1, DARKGRAY); // Ground cube
     DrawGrid(10, 1); // Grid helps with orientation
 
     EndMode3D();
@@ -83,10 +79,10 @@ int main(void) {
 
   UnloadTexture(world_Map.texture); // Unload cubicmap texture
   UnloadModel(world_Map.model);
-    UnloadMesh(world_Map.mesh);
-    UnloadImage(world_Map.image);
+  UnloadMesh(world_Map.mesh);
+  UnloadImage(world_Map.image);
 
-  UnloadModel(weapon_Revolver.model);
+  UnloadModel(weapon.model);
   UnloadModel(enemy_Test.model);
 
   CloseWindow();

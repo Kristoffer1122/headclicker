@@ -12,8 +12,8 @@
 #include <raylib.h>
 #include <raymath.h>
 
-struct Weapon_info weapon_Info;
 struct Bullet bullet;
+struct BulletPool bullet_Pool;
 struct Game game;
 
 void shoot(Camera3D *camera) {
@@ -32,14 +32,14 @@ void shoot(Camera3D *camera) {
       Vector3Add(Vector3Add(Vector3Scale(right, barrelOffset.x),
                             Vector3Scale(up, barrelOffset.y)),
                  Vector3Scale(forward, barrelOffset.z));
-  bullet.position = Vector3Add(camera->position, Vector3Scale(forward, 1.5f));
+  bullet.position = Vector3Add(camera->position, Vector3Scale(forward, 1.0f));
 
   // test bullet
-  // DrawCube(bullet.position, 0.2f, 0.2f, 0.2f, RED);
+  DrawSphere(bullet.position, 0.01f, RED);
   bullet_Fired(camera);
 
   // Set the bullet’s fixed direction
-  bullet.direction = forward;
+  // bullet.direction = forward;
   bullet.speed = 20.0f;
 }
 
@@ -48,13 +48,10 @@ void bullet_Fired(Camera3D *camera) {
   Vector3 forward =
       Vector3Normalize(Vector3Subtract(camera->target, camera->position));
 
-  
+  if (bullet.active) {
 
-  DrawCube(forward, 0.2f, 0.2f, 0.2f, RED);
+    bullet.position.z++;
+  }
 };
 
-void reload(Camera3D *camera) {
-  bullet.offset.x = 0.7f;
-  bullet.offset.y = 0.5f;
-  bullet.offset.z = -0.30f;
-}
+void reload(Camera3D *camera) {}

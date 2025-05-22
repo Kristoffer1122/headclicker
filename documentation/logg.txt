@@ -33,17 +33,30 @@ had to add theta to the mix and calculate the angle we were away from the x, y, 
 Onsdag 21/5/25
 Actually fixed the gun this time, had to include a header file that helps with matrix work,
 
+Torsdag 22/5/25
+With gun working now i made bullets and a shooting mechanic.
+using a struct for the bullets like a class, with things like direction, speed, lifetime, and active bool. then a max of 100 bullets and functions like init_Bullet_Pool, spawn_Bullet, update_Bullets, draw_Bullets, fire_Weapon, check_Bullet_Collision (which i have to finish making).
+keeping delta time so i can remove vsync sometime
 
 -----------------------------------------------------------------------------------------------------------
 						TODO:
 
-	fix shooting, be able to shoot up and down.
 	make the gun lose bullets everytime you shoot, need to reload at 0 bullets
 	big on the collision mechanic
 	collision mechanic between player and wall, enemy and wall and bullets and wall/enemy
 	a simple particle when the bullet hits something
 	Enemies randomly spawning and taking damage, falling when dead
 
+	some sort of memory leak going on?
+
 	Lighting on the map, shaders
+	Nice looking map
+
+-----------------------------------------------------------------------------------------------------------
+					    in the future
+
+	Adding lights and another map, collision with the bullets and player.
+	make the enemy move, and lose health when shot and die when at 0 health.
+	
 
 -----------------------------------------------------------------------------------------------------------

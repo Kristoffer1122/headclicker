@@ -67,14 +67,15 @@ int main(void) {
 
     // shooting mechanic
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-      FireWeapon(&camera, &g_bulletPool); // or &myBulletPool
+      FireWeapon(&camera, &g_bulletPool);
     }
 
+    // update and draw bullets every frame
     UpdateBullets(&g_bulletPool, GetFrameTime());
     DrawBullets(&g_bulletPool);
 
+    // enemy
     spawn_Enemy(p_Camera);
-    DrawGrid(10, 1); // Grid helps with orientation
 
     EndMode3D();
 

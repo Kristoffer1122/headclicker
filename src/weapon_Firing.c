@@ -7,6 +7,7 @@
 //
 // ----------------------------------------------------------------------------------
 #include "weapon_Firing.h"
+#include <raylib.h>
 
 // global bullet pool  NOTE: if i want enemys to be able to shoot too.
 BulletPool g_bulletPool;
@@ -40,8 +41,8 @@ void SpawnBullet(BulletPool *pool, Vector3 position, Vector3 direction,
   bullet->position = position;
   bullet->direction = Vector3Normalize(direction);
   bullet->speed = speed;
-  bullet->lifetime = 5.0f;
-  bullet->radius = 0.03f;
+  bullet->lifetime = 1.0f;
+  bullet->radius = 0.04f;
   bullet->active = true;
   bullet->color = BLACK;
 
@@ -88,11 +89,12 @@ void DrawBullets(BulletPool *pool) {
       // bullet shape
       DrawSphere(pool->bullets[i].position, pool->bullets[i].radius,
                  pool->bullets[i].color);
+      DrawSphereWires(pool->bullets[i].position, 0.2f, 10, 10, GREEN);
 
       // bullet trail
       Vector3 trailEnd =
           Vector3Subtract(pool->bullets[i].position,
-                          Vector3Scale(pool->bullets[i].direction, 1.0f));
+                          Vector3Scale(pool->bullets[i].direction, 0.5f));
       DrawLine3D(pool->bullets[i].position, trailEnd, pool->bullets[i].color);
     }
   }

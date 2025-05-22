@@ -1,29 +1,38 @@
-#include <raylib.h>
-#include <stdint.h>
+#ifndef BULLETS_H
+#define BULLETS_H
 
-// max bullets
-#define MAX_BULLETS 100
+#include "raylib.h"
+#include "raymath.h"
+#include <stdbool.h>
 
+// Define the Bullet structure
 typedef struct Bullet {
-  Vector3 position;
-  Vector3 direction;
-  float speed;
-  float lifetime;
-  bool active;
-  float radius;
-  Color color;
+    Vector3 position;      // Current position
+    Vector3 direction;     // Normalized direction vector
+    float speed;           // Speed in units per second
+    float lifetime;        // How long the bullet exists (in seconds)
+    float radius;          // Collision radius
+    bool active;           // Whether the bullet is active or not
+    Color color;           // Bullet color
 } Bullet;
+
+// Define bullet pool to avoid constant allocation/deallocation
+#define MAX_BULLETS 100    // Maximum number of bullets active at once
 
 typedef struct BulletPool {
     Bullet bullets[MAX_BULLETS];
-    int count;
+    int count;             // Number of active bullets
 } BulletPool;
 
+// Function declarations (prototypes)
+void InitBulletPool(BulletPool *pool);
+void SpawnBullet(BulletPool *pool, Vector3 position, Vector3 direction, float speed);
+void UpdateBullets(BulletPool *pool, float deltaTime);
+void DrawBullets(BulletPool *pool);
+void FireWeapon(Camera3D *camera, BulletPool *bulletPool);
+bool CheckBulletCollision(Bullet *bullet, Vector3 targetPos, float targetRadius);
 
-void shoot(Camera3D* camera);
+// You can also declare a global bullet pool here if you want
+extern BulletPool g_bulletPool;  // extern means it's defined elsewhere
 
-void bullet_Fired(Camera3D* camera);
-
-void bullet_Update(Camera3D* camera);
-
-void reload(Camera3D* camera);
+#endif // BULLETS_H

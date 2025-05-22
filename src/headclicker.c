@@ -34,8 +34,10 @@ int main(void) {
   Camera3D *p_Camera = &camera;
 
   struct World world_Map;
-  struct Bullet bullet;
   struct Game game;
+
+  // init bullets
+  InitBulletPool(&g_bulletPool);
 
   // load weapon and add texture
   Weapon weapon = load_Weapon();
@@ -64,10 +66,12 @@ int main(void) {
     draw_Weapon(p_Camera, p_Weapon);
 
     // shooting mechanic
-    if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-      shoot(p_Camera);
-      bullet_Update(p_Camera);
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+      FireWeapon(&camera, &g_bulletPool); // or &myBulletPool
     }
+
+    UpdateBullets(&g_bulletPool, GetFrameTime());
+    DrawBullets(&g_bulletPool);
 
     spawn_Enemy(p_Camera);
     DrawGrid(10, 1); // Grid helps with orientation
@@ -75,7 +79,7 @@ int main(void) {
     EndMode3D();
 
     DrawFPS(40, 20);
-    DrawText("+", screenWidth / 2, screenHeight / 2, 40, BLACK);
+    DrawText("+", screenWidth / 2 +10, screenHeight / 2 -10, 40, BLACK);
     EndDrawing();
   }
 

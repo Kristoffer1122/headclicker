@@ -66,7 +66,7 @@ int main(void) {
     draw_Weapon(p_Camera, p_Weapon);
 
     // shooting mechanic
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+    if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
       FireWeapon(&camera, &g_bulletPool);
     }
 

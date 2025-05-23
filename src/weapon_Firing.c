@@ -89,6 +89,7 @@ void DrawBullets(BulletPool *pool) {
       // bullet shape
       DrawSphere(pool->bullets[i].position, pool->bullets[i].radius,
                  pool->bullets[i].color);
+      // bullet hitbox
       DrawSphereWires(pool->bullets[i].position, 0.2f, 10, 10, GREEN);
 
       // bullet trail

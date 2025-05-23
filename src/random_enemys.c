@@ -8,7 +8,6 @@
 // ----------------------------------------------------------------------------------
 
 #include "random_enemys.h"
-#include <raylib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -20,11 +19,11 @@ struct Enemy enemy = {
     true,
 };
 
-void spawn_Enemy(Camera3D* camera) {
+Enemy spawn_Enemy(Camera3D* camera) {
 
    enemy.model = LoadModel("../resources/enemy_models/greenman.glb");
 
-    DrawModel(enemy.model, (Vector3){1.0f, 0.0f, 1.0f}, 1.0f, WHITE);
+  return enemy;
 	
 };
 

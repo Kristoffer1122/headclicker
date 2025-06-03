@@ -21,7 +21,6 @@ added a enemy to the map, does nothing yet.
 Torsdag 15/5/25
 Worked on making the gun face towards the camera target, couldnt make it work but learned alot about vectors and how they behave, changed the bullet so it moves towards the camera target, also didnt work but got the bullet to start at the camera target.
 
-
 Fredag 16/5/25
 fixed the gun not changing pitch, but now it doesnt change its yaw, need to use trigonometry to figure out the angle.
 
@@ -36,11 +35,24 @@ Actually fixed the gun this time, had to include a header file that helps with m
 Torsdag 22/5/25
 With gun working now i made bullets and a shooting mechanic.
 using a struct for the bullets like a class, with things like direction, speed, lifetime, and active bool. then a max of 100 bullets and functions like init_Bullet_Pool, spawn_Bullet, update_Bullets, draw_Bullets, fire_Weapon, check_Bullet_Collision (which i have to finish making).
-keeping delta time so i can remove vsync sometime
+finished the bullet system
+
+Fredag 23/5/25
+Added a pixel effect to the screen, making the game look a bit retro, and making sure the screen scales with resolution
+
+Mandag 25/5/25
+Started working with lua. just learning at this point
+
+Tirsdag 26/5/25
+added lua functionality to the game, made enemy bobble up and down with sin and delta time, going to add this to the weapon as well, to simulate breathing.
+
 
 -----------------------------------------------------------------------------------------------------------
 						TODO:
+	
+	LUALUALUALUA
 
+	SOUND EFFECTS!!!!!!!!!!!!
 	make the gun lose bullets everytime you shoot, need to reload at 0 bullets
 	big on the collision mechanic
 	collision mechanic between player and wall, enemy and wall and bullets and wall/enemy
@@ -53,7 +65,7 @@ keeping delta time so i can remove vsync sometime
 	Nice looking map
 
 -----------------------------------------------------------------------------------------------------------
-					    in the future
+				    in the future
 
 	Adding lights and another map, collision with the bullets and player.
 	make the enemy move, and lose health when shot and die when at 0 health.

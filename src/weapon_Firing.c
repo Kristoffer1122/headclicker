@@ -7,10 +7,13 @@
 //
 // ----------------------------------------------------------------------------------
 #include "weapon_Firing.h"
+#include "enemys.h"
 #include <raylib.h>
 
 // global bullet pool  NOTE: if i want enemys to be able to shoot too.
 BulletPool g_bulletPool;
+Enemy benemy;
+Enemy *b_Enemy = &benemy;
 
 // Initialize the bullet pool
 void InitBulletPool(BulletPool *pool) {
@@ -39,6 +42,7 @@ void SpawnBullet(BulletPool *pool, Vector3 position, Vector3 direction,
   // Initialize the bullet
   Bullet *bullet = &pool->bullets[index];
   bullet->position = position;
+  bullet->bulletRect = (BoundingBox){bullet->position, 2, 2, 2};
   bullet->direction = Vector3Normalize(direction);
   bullet->speed = speed;
   bullet->lifetime = 1.0f;
@@ -74,6 +78,9 @@ void UpdateBullets(BulletPool *pool, float deltaTime) {
 
     // NOTE: collision with world check here probably
     // and just bullet.active = false if collision?
+
+    // check enemy hitbox position and see if bullet is inside
+    CheckCollisionBoxes(bullet->bulletRect, b_Enemy->enemyRect);
   }
 
   // keep bullet pool compact, keep order
@@ -90,7 +97,7 @@ void DrawBullets(BulletPool *pool) {
       DrawSphere(pool->bullets[i].position, pool->bullets[i].radius,
                  pool->bullets[i].color);
       // bullet hitbox
-      DrawSphereWires(pool->bullets[i].position, 0.2f, 10, 10, GREEN);
+      DrawBoundingBox(pool->bullets[i].bulletRect, GREEN);
 
       // bullet trail
       Vector3 trailEnd =

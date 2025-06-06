@@ -58,20 +58,22 @@ Onsdag 4/6/25
 Worked with the bullet and enemy collision, added deltatime to the bullets speed, makes collision detection more reliable.
 learned about extern's use in c, being able to use the same struct across files is so nice
 
+Fredag 6/6/25
+Made it possible to respawn the enemy after killing it
+
 
 -----------------------------------------------------------------------------------------------------------
 						TODO:
 	
 	LUALUALUALUA
 
+	Better Hitbox for enemy
 	SOUND EFFECTS!!!!!!!!!!!!
 	make the gun lose bullets everytime you shoot, need to reload at 0 bullets
 	big on the collision mechanic
 	collision mechanic between player and wall, enemy and wall and bullets and wall/enemy
 	a simple particle when the bullet hits something
 	Enemies randomly spawning and taking damage, falling when dead
-
-	some sort of memory leak going on?
 
 	Lighting on the map, shaders
 	Nice looking map

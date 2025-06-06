@@ -57,6 +57,8 @@ Tirsdag 3/6/25
 Onsdag 4/6/25
 Worked with the bullet and enemy collision, added deltatime to the bullets speed, makes collision detection more reliable.
 learned about extern's use in c, being able to use the same struct across files is so nice
+Lucas and Linus made some sound effects for my game,
+Lucas made a shooting sound and Linus made a Ambient Soundeffect that will play through the whole game by recording the classroom and adding some distortion and other effects.
 
 Fredag 6/6/25
 Made it possible to respawn the enemy after killing it

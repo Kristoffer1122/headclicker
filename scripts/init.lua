@@ -8,16 +8,7 @@ function update(deltaTime)
 	time = time + deltaTime
 end
 
-function draw()
-	local x = 2
-	local y = 1
-	local z = -1
-	local height = 1
-	local width = 1
-	local length = 1
-	-- drawCube(x, y, z, height, width, length)
-end
-
+local enemyHealth = 100
 -- enemy position
 local x = 0
 local y = 0.05
@@ -46,5 +37,14 @@ function draw_EnemyHealthBar()
 		x + math.sin(time * x_cos_time) * x_cos_bounce,
 		y + 2.4 + math.cos(time * y_cos_time) * y_cos_bounce,
 		z + math.sin(time * z_cos_time) * z_cos_bounce
+	)
+end
+
+function respawnEnemy()
+	respawn_Enemy(
+		x + math.sin(time * x_cos_time) * x_cos_bounce,
+		y + math.cos(time * y_cos_time) * y_cos_bounce,
+		z + math.sin(time * z_cos_time) * z_cos_bounce,
+		enemyHealth
 	)
 end

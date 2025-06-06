@@ -14,4 +14,4 @@ typedef struct Enemy {
 
 int lua_drawHealthBar(lua_State *L);
 
-Enemy spawn_Enemy();
+Model load_Enemy_Model();

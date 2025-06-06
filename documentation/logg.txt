@@ -46,6 +46,18 @@ Started working with lua. just learning at this point
 Tirsdag 26/5/25
 added lua functionality to the game, made enemy bobble up and down with sin and delta time, going to add this to the weapon as well, to simulate breathing.
 
+Onsdag 27/5/25
+worked with lua and made some simple movements for the enemy
+
+Mandag 2/6/25
+
+
+Tirsdag 3/6/25
+
+Onsdag 4/6/25
+Worked with the bullet and enemy collision, added deltatime to the bullets speed, makes collision detection more reliable.
+learned about extern's use in c, being able to use the same struct across files is so nice
+
 
 -----------------------------------------------------------------------------------------------------------
 						TODO:

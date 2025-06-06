@@ -7,16 +7,19 @@
 //
 // ----------------------------------------------------------------------------------
 #include "weapon_Firing.h"
+#include "sound_effects.h"
 #include "enemys.h"
 #include <raylib.h>
 
 // global bullet pool  NOTE: if i want enemys to be able to shoot too.
 BulletPool g_bulletPool;
-Enemy benemy;
-Enemy *b_Enemy = &benemy;
+extern Enemy enemy;
+Enemy *b_Enemy = &enemy;
+
 
 // Initialize the bullet pool
 void InitBulletPool(BulletPool *pool) {
+  enemy.model = LoadModel("../resources/enemy_models/greenman.glb");
   pool->count = 0;
   for (int i = 0; i < MAX_BULLETS; i++) {
     pool->bullets[i].active = false;
@@ -42,11 +45,12 @@ void SpawnBullet(BulletPool *pool, Vector3 position, Vector3 direction,
   // Initialize the bullet
   Bullet *bullet = &pool->bullets[index];
   bullet->position = position;
-  bullet->bulletRect = (BoundingBox){bullet->position, 2, 2, 2};
+  bullet->bulletRect = (BoundingBox){bullet->position, -2, -2, -2};
   bullet->direction = Vector3Normalize(direction);
+  bullet->damage = 20,
   bullet->speed = speed;
   bullet->lifetime = 1.0f;
-  bullet->radius = 0.04f;
+  bullet->radius = 0.05f;
   bullet->active = true;
   bullet->color = BLACK;
 
@@ -80,7 +84,20 @@ void UpdateBullets(BulletPool *pool, float deltaTime) {
     // and just bullet.active = false if collision?
 
     // check enemy hitbox position and see if bullet is inside
-    CheckCollisionBoxes(bullet->bulletRect, b_Enemy->enemyRect);
+    b_Enemy->enemyRect = GetModelBoundingBox(b_Enemy->model);
+    CheckCollisionBoxSphere(b_Enemy->enemyRect, pool->bullets[i].position, 0.1);
+    if (!CheckCollisionBoxSphere(b_Enemy->enemyRect, pool->bullets[i].position,
+                                0.1)) {
+      // red means no collision
+     Color box_Color = RED;
+    DrawBoundingBox(b_Enemy->enemyRect, box_Color);
+    } else {
+      // green means collision
+      Color box_Color = GREEN;
+    DrawBoundingBox(b_Enemy->enemyRect, box_Color);
+      pool->bullets[i].active = false;
+      b_Enemy->health -= bullet->damage;
+   }
   }
 
   // keep bullet pool compact, keep order
@@ -97,7 +114,7 @@ void DrawBullets(BulletPool *pool) {
       DrawSphere(pool->bullets[i].position, pool->bullets[i].radius,
                  pool->bullets[i].color);
       // bullet hitbox
-      DrawBoundingBox(pool->bullets[i].bulletRect, GREEN);
+      DrawSphereWires(pool->bullets[i].position, 0.1, 12, 12, GREEN);
 
       // bullet trail
       Vector3 trailEnd =
@@ -110,6 +127,7 @@ void DrawBullets(BulletPool *pool) {
 
 // shooting
 void FireWeapon(Camera3D *camera, BulletPool *bulletPool) {
+  float delta_Time = GetFrameTime();
   // directions in world
   Vector3 forward =
       Vector3Normalize(Vector3Subtract(camera->target, camera->position));
@@ -117,7 +135,7 @@ void FireWeapon(Camera3D *camera, BulletPool *bulletPool) {
   Vector3 up = Vector3Normalize(camera->up);
 
   // position bullet NOTE: change if wrong
-  Vector3 offset = {0.5f, -0.1f, -0.5f};
+  Vector3 offset = {0.5f, -0.1f, 0};
   Vector3 spawnPos = {camera->position.x + right.x * offset.x +
                           up.x * offset.y + forward.x * offset.z,
                       camera->position.y + right.y * offset.x +
@@ -128,7 +146,7 @@ void FireWeapon(Camera3D *camera, BulletPool *bulletPool) {
   Vector3 direction = forward;
 
   // spawn hte bullet
-  SpawnBullet(bulletPool, spawnPos, direction, 200.0f);
+  SpawnBullet(bulletPool, spawnPos, direction, 6000.0f * delta_Time);
 }
 
 // bullet to enemy collision

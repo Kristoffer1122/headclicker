@@ -10,6 +10,7 @@ typedef struct Bullet {
     Vector3 position;      // Current position
     Vector3 direction;     // Normalized direction vector
     BoundingBox bulletRect;
+    int damage;
     float speed;           // Speed in units per second
     float lifetime;        // How long the bullet exists (in seconds)
     float radius;          // Collision radius

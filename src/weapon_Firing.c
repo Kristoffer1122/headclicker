@@ -3,10 +3,8 @@
 #include <raylib.h>
 #include <stdio.h>
 
-// BUG: Conflicting global enemy declarations!
-// This file declares enemy differently than enemys.h
-extern Enemy enemy;  // BUG: This is a struct, not a pointer
-Enemy *b_Enemy = &enemy;  // BUG: Taking address of extern struct
+// FIX: Use consistent global enemy pointer from enemys.h
+// Removed conflicting declarations
 
 typedef struct Bullet {
     Vector3 position;
@@ -35,8 +33,8 @@ void fire_Weapon(Vector3 origin, Vector3 direction) {
             };
             bullets[i].active = true;
             
-            // BUG: Sound loaded every shot - memory leak
-            play_Sound_Effect("resources/gunshot.wav");
+            // FIX: Use pre-loaded sound from sound manager
+            play_Sound_Effect(SOUND_GUNSHOT);
             break;
         }
     }
@@ -50,12 +48,19 @@ void update_Bullets(void) {
             bullets[i].position.z += bullets[i].velocity.z * GetFrameTime();
             
             // Check collision with enemy
-            // BUG: Using b_Enemy which points to wrong enemy structure
-            if (b_Enemy && CheckCollisionSpheres(bullets[i].position, 0.1f, 
-                                                  b_Enemy->position, 1.0f)) {
-                b_Enemy->health -= 10;
-                if (b_Enemy->health <= 0) {
-                    b_Enemy->isAlive = false;
+            // FIX: Use consistent g_Enemy pointer from enemys.h
+            if (g_Enemy && g_Enemy->isAlive && 
+                CheckCollisionSpheres(bullets[i].position, 0.1f, 
+                                     g_Enemy->position, 1.0f)) {
+                g_Enemy->health -= 10;
+                
+                // FIX: Play hit sound
+                play_Sound_Effect(SOUND_HIT);
+                
+                if (g_Enemy->health <= 0) {
+                    g_Enemy->isAlive = false;
+                    // FIX: Play death sound
+                    play_Sound_Effect(SOUND_DEATH);
                 }
                 bullets[i].active = false;
             }

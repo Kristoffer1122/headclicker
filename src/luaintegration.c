@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Global Lua state pointer - BUG: This doesn't get updated properly
+// Global Lua state pointer
 static lua_State *L = NULL;
 
-// BUG: This function doesn't return the new state or update the global pointer
+// Initialize Lua state and update global pointer
 void start_lua(void) {
     lua_State *new_L = luaL_newstate();
     if (new_L == NULL) {
@@ -21,18 +21,19 @@ void start_lua(void) {
         lua_pop(new_L, 1);
     }
     
-    // BUG: Local variable new_L is not assigned to global L
-    // This causes L to remain NULL or point to old state
+    // FIX: Update global pointer to the new Lua state
+    L = new_L;
 }
 
-// BUG: Closes Lua state but start_lua doesn't update the pointer
+// Reload Lua state safely
 void reload_Lua(void) {
     if (L != NULL) {
         lua_close(L);
-        // BUG: L is now dangling pointer
+        // FIX: Set to NULL before creating new state
+        L = NULL;
     }
     start_lua();
-    // BUG: L still points to old/closed state, causes crash
+    // FIX: start_lua() now properly updates L with the new state
 }
 
 void cleanup_lua(void) {

@@ -22,7 +22,7 @@ int main(void) {
     
     // Initialize systems
     init_Sound_System();
-    start_lua();  // BUG: Doesn't properly initialize global Lua state
+    start_lua();
     init_Enemy();
     init_Weapon_System();
     
@@ -31,7 +31,7 @@ int main(void) {
         // Input handling
         if (IsKeyPressed(KEY_O)) {
             printf("Reloading Lua...\n");
-            reload_Lua();  // BUG: This will crash!
+            reload_Lua();
         }
         
         if (IsKeyPressed(KEY_R)) {
@@ -62,7 +62,7 @@ int main(void) {
         draw_Bullets();
         EndMode3D();
         
-        DrawText("Press O to reload Lua (WILL CRASH!)", 10, 10, 20, RED);
+        DrawText("Press O to reload Lua", 10, 10, 20, DARKGRAY);
         DrawText("Press R to respawn enemy", 10, 40, 20, DARKGRAY);
         DrawText("Click to fire", 10, 70, 20, DARKGRAY);
         

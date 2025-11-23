@@ -1,0 +1,27 @@
+# Build artifacts
+obj/
+bin/
+*.o
+*.exe
+*.out
+*.so
+*.dll
+*.dylib
+*.a
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.log
+download.sh
+get_files.py
+
+# OS files
+.DS_Store
+Thumbs.db
